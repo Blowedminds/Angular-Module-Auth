@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         map(response => this.helpersService.parseToken(response)),
         tap(response => {
 
+<<<<<<< HEAD
         sessionStorage.setItem('token', response.token);
+=======
+          localStorage.setItem('token', response.token);
+>>>>>>> 31a202f9655fe2859ced6b06caf87358c9f6de35
 
           return response;
         }),
