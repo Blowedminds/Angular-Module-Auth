@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { HelpersService, CacheService } from '../../imports';
+import { HelpersService, CacheService, RoutingListService } from '../../imports';
 import { AuthRequestService } from '../../services/auth-request.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -24,48 +24,45 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private authRequestService: AuthRequestService,
     private helpersService: HelpersService,
-    private cacheService: CacheService
+    private routingListService: RoutingListService
   ) { }
 
   ngOnInit() {
-    const rq1 = this.authRequestService.checkAuthenticated().subscribe( response => response ? this.helpersService.navigate(['/']) : null);
+    const rq1 = this.authRequestService.checkAuthenticated()
+    .subscribe(response => response ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null);
 
     this.subs.add(rq1);
   }
 
-  ngOnDestroy()
-  {
+  ngOnDestroy() {
     this.subs.unsubscribe();
   }
 
-  login(f: NgForm)
-  {
+  login(f: NgForm) {
     this.error = false;
 
     const rq1 = this.authRequestService.login({
       email: f.value.email,
       password: f.value.password
     })
-    .pipe(
-      map(response => this.helpersService.parseToken(response)),
-      tap(response => {
+      .pipe(
+        map(response => this.helpersService.parseToken(response)),
+        tap(response => {
 
-        localStorage.setItem('token', response.token);
+          localStorage.setItem('token', response.token);
 
-        return response;
-      }),
-      catchError( error => this.loginErrorHandler(error))
-    )
-    .subscribe((response) => {
-
-      this.helpersService.navigate(['/articles']);
-    });
+          return response;
+        }),
+        catchError(error => this.loginErrorHandler(error))
+      )
+      .subscribe((response) => {
+        this.helpersService.navigate([this.routingListService.getUrl('main')]);
+      });
 
     this.subs.add(rq1);
   }
 
-  private loginErrorHandler(error: any, router: any = null): Promise<any>
-  {
+  private loginErrorHandler(error: any, router: any = null): Promise<any> {
     const jsError = error.error;
 
     console.log(error);
