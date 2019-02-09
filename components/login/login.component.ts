@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   errorText = 'Kullanıcı adı veya şifre yanlış';
 
+  logining = false;
+
   subs = new Subscription();
 
   constructor(
@@ -29,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const rq1 = this.authRequestService.checkAuthenticated()
-    .subscribe(response => response ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null);
+      .subscribe(response => response ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null);
 
     this.subs.add(rq1);
   }
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(f: NgForm) {
     this.error = false;
+    this.logining = true;
 
     const rq1 = this.authRequestService.login({
       email: f.value.email,
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         map(response => this.helpersService.parseToken(response)),
         tap(response => {
 
-        sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem('token', response.token);
 
           return response;
         }),
@@ -57,6 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe((response) => {
         this.helpersService.navigate([this.routingListService.getUrl('main')]);
+        this.logining = false;
       });
 
     this.subs.add(rq1);
@@ -64,6 +68,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private loginErrorHandler(error: any, router: any = null): Promise<any> {
     const jsError = error.error;
+
+    this.logining = false;
 
     console.log(error);
 

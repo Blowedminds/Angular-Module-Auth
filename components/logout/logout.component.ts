@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { HelpersService, CacheService } from '../../imports';
 import { AuthRequestService } from '../../services/auth-request.service';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-logout',
@@ -19,12 +18,11 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
 
-    let rq1 = this.authRequestService.logout().subscribe(response => {
-      localStorage.removeItem('token')
+    const rq1 = this.authRequestService.logout().subscribe(response => {
+      localStorage.removeItem('token');
       this.helpersService.navigate(['login']);
-      // this.cacheService.deleteUser()
-      rq1.unsubscribe()
-      rq1 = null
+      this.cacheService.clear()
+      rq1.unsubscribe();
     })
   }
 
