@@ -30,3 +30,5 @@ auth: {
       logout: { url: 'logout/' }
     }
 `
+4. In `routes` file, you must add ` main: {url: 'AFTER_LOGIN_PAGE'}`, where 'AFTER_LOGIN_PAGE' is your start page, and it must be valid.
+ 
