@@ -24,39 +24,30 @@ export class RegisterComponent implements OnInit {
   errorText: string;
 
   ngOnInit() {
-
-    // let rq1 = this.authRequestService.checkAuthenticated().subscribe(response => {
-    //   if(response)
-    //     this.helpersService.navigate(['/']);
-    //   rq1.unsubscribe()
-    //   rq1 = null
-    // })
   }
 
-  register(f: NgForm)
-  {
+  register(f: NgForm) {
     let rq2 = this.authRequestService.register({
       name: f.value.name,
       email: f.value.email,
       password: f.value.password,
       password_confirmation: f.value.password_confirmation
     })
-    .pipe(
-      map(response => this.helpersService.parseToken(response)),
-      tap(response => {
-        localStorage.setItem('token', response.token);
-        this.helpersService.navigate(['/']);
-      }),
-      catchError(error => this.registerErrorHandle(error))
-    )
-    .subscribe(response => {
-      rq2.unsubscribe();
-      rq2 = null;
-    });
+      .pipe(
+        map(response => this.helpersService.parseToken(response)),
+        tap(response => {
+          localStorage.setItem('token', response.token);
+          this.helpersService.navigate(['/']);
+        }),
+        catchError(error => this.registerErrorHandle(error))
+      )
+      .subscribe(response => {
+        rq2.unsubscribe();
+        rq2 = null;
+      });
   }
 
-  private registerErrorHandle(error: any, route: any = null): Promise<any>
-  {
+  private registerErrorHandle(error: any, route: any = null): Promise<any> {
     const jsError = error.error;
 
     switch (error.status) {

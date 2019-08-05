@@ -22,7 +22,7 @@ export class AuthRequestService extends MainRequestService {
     const url = this.makeUrl('auth.is-authenticated');
 
     return this.http
-                    .get(url, this.options);
+      .get(url, this.options);
 
   }
 
@@ -30,21 +30,21 @@ export class AuthRequestService extends MainRequestService {
     const url = this.makeUrl('auth.register');
 
     return this.http
-                    .put(url, JSON.stringify(data), this.options);
+      .put(url, JSON.stringify(data), this.options);
   }
 
   login(data: any): Observable<any> {
     const url = this.makeUrl('auth.login');
 
     return this.http
-                    .post(url, JSON.stringify(data), this.options);
+      .post(url, JSON.stringify(data), this.options);
   }
 
   logout(): Observable<any> {
     const url = this.makeUrl('auth.logout');
 
     return this.http
-                    .get(url, this.options)
-                    .pipe(catchError(error => this.handleError(error)));
+      .get(url, this.options)
+      .pipe(catchError(error => this.handleError(error)));
   }
 }

@@ -30,10 +30,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    const rq1 = this.authRequestService.checkAuthenticated()
-      .subscribe(response => response ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null);
-
-    this.subs.add(rq1);
+    this.subs.add(
+      this.authRequestService.checkAuthenticated()
+        .subscribe(response => response.authenticated ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null)
+    );
   }
 
   ngOnDestroy() {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.error = false;
     this.logining = true;
 
-    const rq1 = this.authRequestService.login({
+    this.subs.add(this.authRequestService.login({
       email: f.value.email,
       password: f.value.password
     })
@@ -61,9 +61,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.helpersService.navigate([this.routingListService.getUrl('main')]);
         this.logining = false;
-      });
-
-    this.subs.add(rq1);
+      })
+    );
   }
 
   private loginErrorHandler(error: any, router: any = null): Promise<any> {
