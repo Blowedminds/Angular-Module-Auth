@@ -44,33 +44,29 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.error = false;
     this.logining = true;
 
-    this.subs.add(this.authRequestService.login({
-      email: f.value.email,
-      password: f.value.password
-    })
-      .pipe(
-        map(response => this.helpersService.parseToken(response)),
-        tap(response => {
-
-          sessionStorage.setItem('token', response.token);
-
-          return response;
-        }),
-        catchError(error => this.loginErrorHandler(error))
-      )
-      .subscribe((response) => {
-        this.helpersService.navigate([this.routingListService.getUrl('main')]);
-        this.logining = false;
+    this.subs.add(
+      this.authRequestService.login({
+        email: f.value.email,
+        password: f.value.password
       })
+        .pipe(
+          map(response => this.helpersService.parseToken(response)),
+          tap(response => {
+
+            sessionStorage.setItem('token', response.token);
+
+            return response;
+          }),
+          catchError(error => this.loginErrorHandler(error))
+        )
+        .subscribe((response) => this.helpersService.navigate([this.routingListService.getUrl('main')]))
     );
   }
 
-  private loginErrorHandler(error: any, router: any = null): Promise<any> {
+  private loginErrorHandler(error: any): Promise<any> {
     const jsError = error.error;
 
     this.logining = false;
-
-    console.log(error);
 
     switch (error.status) {
       case 401:
@@ -82,7 +78,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     }
 
-    return Promise.reject(error.message || error);
+    return Promise.reject(error);
   }
 
 }

@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  private registerErrorHandle(error: any, route: any = null): Promise<any> {
+  private registerErrorHandle(error: any): Promise<any> {
     const jsError = error.error;
 
     switch (error.status) {
@@ -62,6 +62,6 @@ export class RegisterComponent implements OnInit {
         break;
     }
 
-    return Promise.reject(error.message || error);
+    return Promise.reject(error);
   }
 }
