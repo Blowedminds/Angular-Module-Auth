@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthRoutingModule } from './auth-routing.module';
 
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
 import { AuthRequestService } from './services/auth-request.service';
@@ -21,7 +21,7 @@ import { AuthService } from './services/auth.service';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent,
+    SignUpComponent,
     LogoutComponent
   ],
   providers: [

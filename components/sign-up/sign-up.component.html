@@ -1,0 +1,65 @@
+<div class="container is-vcentered">
+  <div class="columns is-vcentered">
+    <div class="column is-one-quarter">
+      <mat-card>
+
+        <div class="title">
+          <h1 class="is-size-4">{{locale.sign_up.title}}</h1>
+          <hr>
+        </div>
+
+        <form class="form" [formGroup]="signUpFormGroup" (ngSubmit)="signUp(signUpFormGroup.value)">
+
+          <div class="field">
+            <mat-card class="form-error" *ngIf="error.error">
+              <p>{{error.text}}</p>
+            </mat-card>
+          </div>
+
+          <mat-form-field class="field">
+            <input matInput [placeholder]="locale.fields.name" formControlName="name" type="text" required>
+            <mat-error *ngIf="signUpFormGroup.controls.name.hasError('minlength')">
+              {{locale.validation.name}}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="field">
+            <mat-form-field class="field">
+              <input matInput [placeholder]="locale.fields.email" formControlName="email" type="email" required>
+              <mat-error *ngIf="signUpFormGroup.controls.email.hasError('email')">
+                {{locale.validation.email}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="field">
+            <mat-form-field class="field">
+              <input matInput [placeholder]="locale.fields.password" formControlName="password" type="password"
+                     required>
+              <mat-error *ngIf="signUpFormGroup.controls.password.hasError('pattern')">
+                {{locale.validation.password}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="field">
+            <mat-form-field class="field">
+              <input matInput [placeholder]="locale.fields.password_confirm" formControlName="password_confirm"
+                     type="password" [errorStateMatcher]="passwordMismatchMatcher" required>
+              <mat-error *ngIf="1 === 1">
+                {{locale.validation.password_confirm}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" class="field" type="submit"
+                  [disabled]="!signUpFormGroup.valid || signUpFormGroup.errors?.password_mismatch || isProcessing">{{locale.actions.sign_up}}
+          </button>
+
+        </form>
+      </mat-card>
+
+    </div>
+
+  </div>
+</div>

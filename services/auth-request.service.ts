@@ -20,8 +20,8 @@ export class AuthRequestService extends MainRequestService {
     return this.makeGetRequest('auth.is-authenticated');
   }
 
-  register(data: any): Observable<any> {
-    return this.makePostRequest('auth.register', data);
+  signUp(data: any): Observable<any> {
+    return this.makePostRequest('auth.sign_up', data);
   }
 
   login(data: any): Observable<any> {
