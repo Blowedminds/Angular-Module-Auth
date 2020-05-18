@@ -29,8 +29,6 @@ export class SignUpComponent extends MainComponent implements OnInit {
 
   passwordMismatchMatcher = new PasswordMismatchMatcher();
 
-  isProcessing = false;
-
   constructor(
     private authRequestService: AuthRequestService,
     private helpersService: HelpersService,
@@ -61,14 +59,8 @@ export class SignUpComponent extends MainComponent implements OnInit {
   }
 
   signUp(data: any) {
-    this.isProcessing = true;
+    this.enterProcessingState();
     this.error.error = false;
-
-    data = {
-      name: data.name,
-      email: data.email,
-      password: data.password
-    };
 
     this.subs.add(
       this.authRequestService.signUp(data)
@@ -84,13 +76,13 @@ export class SignUpComponent extends MainComponent implements OnInit {
   private signUpErrorHandler(error: any): Promise<any> {
     const requestError = error.error;
 
-    this.isProcessing = false;
+    this.leaveProcessingState();
 
     switch (error.status) {
       case 422:
         this.error.error = true;
-        if (requestError.message_code in errors) {
-          this.error.text = locale.errors[errors[requestError.message_code].locale_key];
+        if (requestError.message in errors) {
+          this.error.text = locale.errors[errors[requestError.message].locale_key];
         }
         break;
     }

@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
-import { Subscription } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 
-import { HelpersService, CacheService, RoutingListService } from '../../imports';
-import { AuthRequestService } from '../../services/auth-request.service';
-import { AuthService } from '../../services/auth.service';
+import {HelpersService, RoutingListService} from '../../imports';
+import {AuthRequestService} from '../../services/auth-request.service';
+
+import {locale} from '../../locale';
 
 @Component({
   selector: 'app-login',
@@ -17,23 +18,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   error = false;
 
-  errorText = 'Kullanıcı adı veya şifre yanlış';
+  errorText = locale.errors.wrong_username_or_password;
 
   logining = false;
 
   subs = new Subscription();
 
   constructor(
-    private authRequestService: AuthRequestService,
+    private requestService: AuthRequestService,
     private helpersService: HelpersService,
     private routingListService: RoutingListService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.subs.add(
-      this.authRequestService.checkAuthenticated()
-        .subscribe(response => response.authenticated ? this.helpersService.navigate([this.routingListService.getUrl('main')]) : null)
-    );
   }
 
   ngOnDestroy() {
@@ -45,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.logining = true;
 
     this.subs.add(
-      this.authRequestService.login({
+      this.requestService.login({
         email: f.value.email,
         password: f.value.password
       })
@@ -75,7 +73,6 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.error = true;
             break;
         }
-
     }
 
     return Promise.reject(error);

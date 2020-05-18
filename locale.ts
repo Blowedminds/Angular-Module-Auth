@@ -1,7 +1,7 @@
 export const locale: any = {
   errors: {
     wrong_username_or_password: 'Wrong username or password',
-    user_already_exist: 'User with the given email already exists.'
+    user_exists: 'User with the given email already exists.'
   },
   validation: {
     name: 'Name must be at least 6 characters long.',
