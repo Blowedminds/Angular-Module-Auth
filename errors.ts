@@ -3,6 +3,11 @@ export const errors: { [key: string]: Error } = {
     code: 422,
     error_code: 100,
     locale_key: 'user_exists'
+  },
+  invalid_credentials: {
+    code: 422,
+    error_code: 101,
+    locale_key: 'invalid_credentials'
   }
 };
 

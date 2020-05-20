@@ -1,0 +1,16 @@
+.popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, .5);
+  top: 0;
+  bottom: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrap {
+    width: 370px;
+  }
+}

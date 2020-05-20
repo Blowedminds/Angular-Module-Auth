@@ -4,19 +4,19 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {LogoutComponent} from './components/logout/logout.component';
+import {LoginPopupComponent} from './components/login-popup/login-popup.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', /* canActivate: [GuestRouteGuard],*/ component: LoginComponent},
-  {path: 'sign-up', /* canActivate: [GuestRouteGuard],*/ component: SignUpComponent},
-  {path: 'logout', component: LogoutComponent}
+  {path: 'auth/login', /* canActivate: [GuestRouteGuard],*/ component: LoginComponent},
+  {path: 'auth/sign-up', /* canActivate: [GuestRouteGuard],*/ component: SignUpComponent},
+  {path: 'auth/logout', component: LogoutComponent},
+  {path: 'popup', component: LoginPopupComponent, outlet: 'auth'}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes,
-      {enableTracing: false}
-    )],
+    RouterModule.forRoot(routes)
+  ],
   exports: [
     RouterModule
   ]

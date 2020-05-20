@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 
 import {catchError, tap} from 'rxjs/operators';
 
-import {HelpersService, MainComponent} from '../../imports';
+import {HelperService, MainComponent} from '../../imports';
 import {AuthRequestService} from '../../services/auth-request.service';
 import {locale} from '../../locale';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -31,7 +31,7 @@ export class SignUpComponent extends MainComponent implements OnInit {
 
   constructor(
     private authRequestService: AuthRequestService,
-    private helpersService: HelpersService,
+    private helpersService: HelperService,
     private formBuilder: FormBuilder
   ) {
     super();

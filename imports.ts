@@ -1,7 +1,8 @@
 export {CacheService} from '../core/services/cache.service';
 export {RoutingListService} from '../core/services/routing-list.service';
-export {HelpersService} from '../core/services/helpers.service';
+export {HelperService} from '../core/services/helper.service';
 export {MainRequestService} from '../core/services/main-request.service';
+export {RequestFailService, RetryRequest} from '../core/services/request-fail.service';
 export {TestingHelper} from '../core/testing/helper';
 export {CoreModule} from '../core/core.module';
 export {SharedModule} from '../shared/shared.module';

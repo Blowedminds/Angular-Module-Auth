@@ -1,19 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
-import { HelpersService, MainRequestService, RoutingListService } from '../imports';
+import {MainRequestService, RoutingListService} from '../imports';
 
 @Injectable()
 export class AuthRequestService extends MainRequestService {
 
   constructor(
     http: HttpClient,
-    helpersService: HelpersService,
     routingListService: RoutingListService
   ) {
-    super(http, helpersService, routingListService);
+    super(http, routingListService);
   }
 
   checkAuthenticated(): Observable<any> {

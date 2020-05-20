@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HelpersService, CacheService } from '../../imports';
+import { HelperService, CacheService } from '../../imports';
 import { AuthRequestService } from '../../services/auth-request.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class LogoutComponent implements OnInit {
 
   constructor(
     private authRequestService: AuthRequestService,
-    private helpersService: HelpersService,
+    private helpersService: HelperService,
     private cacheService: CacheService
   ) { }
 

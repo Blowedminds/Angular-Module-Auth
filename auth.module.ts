@@ -11,6 +11,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 
 import { AuthRequestService } from './services/auth-request.service';
 import { AuthService } from './services/auth.service';
+import { LoginPopupComponent } from './components/login-popup/login-popup.component';
+import { LoginBodyComponent } from './components/login-body/login-body.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { AuthService } from './services/auth.service';
   declarations: [
     LoginComponent,
     SignUpComponent,
-    LogoutComponent
+    LogoutComponent,
+    LoginPopupComponent,
+    LoginBodyComponent
   ],
   providers: [
     AuthRequestService,
