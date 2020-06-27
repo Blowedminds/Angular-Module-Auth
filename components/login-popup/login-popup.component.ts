@@ -16,9 +16,7 @@ export class LoginPopupComponent extends MainComponent implements OnInit {
     private router: Router
   ) {
     super();
-    // Multiple failed requests will cause issues, try to implement pushing these things into an array
-    this.subs.add(this.requestFailService.failedRequests.subscribe(request => this.retryRequest.push(request))
-    );
+    this.subs.add(this.requestFailService.failedRequests.subscribe(request => this.retryRequest.push(request)));
   }
 
   ngOnInit(): void {

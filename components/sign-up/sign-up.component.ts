@@ -65,7 +65,7 @@ export class SignUpComponent extends MainComponent implements OnInit {
     this.subs.add(
       this.authRequestService.signUp(data)
         .pipe(
-          tap(response => this.helpersService.navigate(['/login'])),
+          tap(response => this.helpersService.navigate(['/auth/login'])),
           catchError(error => this.signUpErrorHandler(error))
         )
         .subscribe(response => {
