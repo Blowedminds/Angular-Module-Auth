@@ -22,6 +22,10 @@ export class LoginBodyComponent extends MainComponent implements OnInit {
 
   @Output() loggedIn = new EventEmitter();
 
+  get isPageReady(): boolean {
+    return true;
+  }
+
   constructor(
     private requestService: AuthRequestService
   ) {

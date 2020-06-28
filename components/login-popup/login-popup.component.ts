@@ -11,6 +11,10 @@ export class LoginPopupComponent extends MainComponent implements OnInit {
 
   retryRequest: Array<RetryRequest> = [];
 
+  get isPageReady(): boolean {
+    return true;
+  }
+
   constructor(
     private requestFailService: RequestFailService,
     private router: Router

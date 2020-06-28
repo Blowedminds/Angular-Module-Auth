@@ -29,6 +29,10 @@ export class SignUpComponent extends MainComponent implements OnInit {
 
   passwordMismatchMatcher = new PasswordMismatchMatcher();
 
+  get isPageReady(): boolean {
+    return true;
+  }
+
   constructor(
     private authRequestService: AuthRequestService,
     private helpersService: HelperService,
@@ -102,5 +106,5 @@ export const passwordValidator: ValidatorFn = (control: FormGroup): ValidationEr
   const password = control.get('password');
   const passwordConfirm = control.get('password_confirm');
 
-  return password.value !== passwordConfirm.value ? {password_mismatch: true} : null;
+  return password.value !== passwordConfirm.value ? {passwordMismatch: true} : null;
 };
